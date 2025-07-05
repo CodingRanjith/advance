@@ -16,7 +16,11 @@ $('document').ready(function(){
 			$('#b77').animate({top:240, left: vw+250},500);
 		});
 
+
+		 $('#play, #bannar_coming, #balloons_flying, #cake_fadein, #light_candle, #wish_message, #show_images, #story').hide();
+
 	$('#turn_on').click(function(){
+		showCelebrationEffects();
 		$('#bulb_yellow').addClass('bulb-glow-yellow');
 		$('#bulb_red').addClass('bulb-glow-red');
 		$('#bulb_blue').addClass('bulb-glow-blue');
@@ -29,6 +33,7 @@ $('document').ready(function(){
 		});
 	});
 	$('#play').click(function(){
+		showCelebrationEffects();
 		var audio = $('.song')[0];
         audio.play();
         $('#bulb_yellow').addClass('bulb-glow-yellow-after');
@@ -45,6 +50,7 @@ $('document').ready(function(){
 	});
 
 	$('#bannar_coming').click(function(){
+		showCelebrationEffects();
   $('.bannar').addClass('bannar-come');
   $(this).fadeOut('slow').delay(2000).promise().done(function(){
     $('#balloons_flying').fadeIn('slow');
@@ -104,6 +110,7 @@ $('document').ready(function(){
 	}
 
 	$('#balloons_flying').click(function(){
+		showCelebrationEffects();
 		$('.balloon-border').animate({top:-500},8000);
 		$('#b1,#b4,#b5,#b7').addClass('balloons-rotate-behaviour-one');
 		$('#b2,#b3,#b6').addClass('balloons-rotate-behaviour-two');
@@ -126,6 +133,7 @@ $('document').ready(function(){
 	});	
 
 	$('#cake_fadein').click(function(){
+		showCelebrationEffects();
 		$('.cake').fadeIn('slow');
 		$(this).fadeOut('slow').delay(3000).promise().done(function(){
 			$('#light_candle').fadeIn('slow');
@@ -133,6 +141,7 @@ $('document').ready(function(){
 	});
 
 	$('#light_candle').click(function(){
+		showCelebrationEffects();
 		$('.fuego').fadeIn('slow');
 		$(this).fadeOut('slow').promise().done(function(){
 			$('#wish_message').fadeIn('slow');
@@ -141,31 +150,36 @@ $('document').ready(function(){
 
 		
 	$('#wish_message').click(function(){
-		 vw = $(window).width()/2;
+		showCelebrationEffects();
+	vw = $(window).width()/2;
 
-		$('#b1,#b2,#b3,#b4,#b5,#b6,#b7').stop();
-		$('#b1').attr('id','b11');
-		$('#b2').attr('id','b22')
-		$('#b3').attr('id','b33')
-		$('#b4').attr('id','b44')
-		$('#b5').attr('id','b55')
-		$('#b6').attr('id','b66')
-		$('#b7').attr('id','b77')
-		$('#b11').animate({top:240, left: vw-350},500);
-		$('#b22').animate({top:240, left: vw-250},500);
-		$('#b33').animate({top:240, left: vw-150},500);
-		$('#b44').animate({top:240, left: vw-50},500);
-		$('#b55').animate({top:240, left: vw+50},500);
-		$('#b66').animate({top:240, left: vw+150},500);
-		$('#b77').animate({top:240, left: vw+250},500);
-		$('.balloons').css('opacity','0.9');
-		$('.balloons h2').fadeIn(3000);
-		$(this).fadeOut('slow').delay(3000).promise().done(function(){
-			$('#story').fadeIn('slow');
-		});
+	$('#b1,#b2,#b3,#b4,#b5,#b6,#b7').stop();
+	$('#b1').attr('id','b11');
+	$('#b2').attr('id','b22');
+	$('#b3').attr('id','b33');
+	$('#b4').attr('id','b44');
+	$('#b5').attr('id','b55');
+	$('#b6').attr('id','b66');
+	$('#b7').attr('id','b77');
+
+	$('#b11').animate({top:240, left: vw-350},500);
+	$('#b22').animate({top:240, left: vw-250},500);
+	$('#b33').animate({top:240, left: vw-150},500);
+	$('#b44').animate({top:240, left: vw-50},500);
+	$('#b55').animate({top:240, left: vw+50},500);
+	$('#b66').animate({top:240, left: vw+150},500);
+	$('#b77').animate({top:240, left: vw+250},500);
+
+	$('.balloons').css('opacity','0.9');
+	$('.balloons h2').fadeIn(3000);
+	$(this).fadeOut('slow').delay(3000).promise().done(function(){
+		$('#show_images').fadeIn('slow'); // ✅ Add this
 	});
+});
+
 	
 	$('#story').click(function(){
+		showCelebrationEffects();
 		$(this).fadeOut('slow');
 		$('.cake').fadeOut('fast').promise().done(function(){
 			$('.message').fadeIn('slow');
@@ -196,7 +210,87 @@ $('document').ready(function(){
 	});
 });
 
+$('#show_images').click(function () {
+  // Hide all main elements
+  $('.cake, .message, .balloons, .bannar, .balloon-border, .fuego, #bannar_coming, #balloons_flying, #cake_fadein, #light_candle, #wish_message, #turn_on, #play, #show_images, #story').hide();
 
+  // Show the container that holds bulbs (if it's separate)
+  $('.container').fadeIn(); // optional if your lights are inside this
+
+  // Keep background lights (glow) active
+  $('body').removeClass().addClass('peach-after');
+
+  // Re-add bulb glow classes (in case they were removed)
+  $('#bulb_yellow').addClass('bulb-glow-yellow bulb-glow-yellow-after');
+  $('#bulb_red').addClass('bulb-glow-red bulb-glow-red-after');
+  $('#bulb_blue').addClass('bulb-glow-blue bulb-glow-blue-after');
+  $('#bulb_green').addClass('bulb-glow-green bulb-glow-green-after');
+  $('#bulb_pink').addClass('bulb-glow-pink bulb-glow-pink-after');
+  $('#bulb_orange').addClass('bulb-glow-orange bulb-glow-orange-after');
+
+  // Show the image gallery
+  $('#imageGallery').fadeIn(1000);
+
+  // Start visual effects
+  startConfetti();
+  startEmojiRain();
+
+  // Show the story button after a delay
+  setTimeout(() => {
+    $('#story').fadeIn(1000);
+    startFireworks();
+  }, 2000);
+});
+
+
+
+
+// 🎊 Confetti
+function startConfetti() {
+  confetti({
+    particleCount: 200,
+    spread: 180,
+    origin: { y: 0.6 }
+  });
+}
+
+// 💕 Emoji Rain
+function startEmojiRain() {
+  const emojiList = ["💖", "🎂", "🎉", "🌟", "💕"];
+  for (let i = 0; i < 30; i++) {
+    const span = document.createElement("span");
+    span.innerText = emojiList[Math.floor(Math.random() * emojiList.length)];
+    span.style.left = Math.random() * 100 + "vw";
+    span.style.animationDelay = Math.random() * 2 + "s";
+    document.querySelector(".emoji-rain").appendChild(span);
+    setTimeout(() => span.remove(), 5000);
+  }
+}
+
+// 🎆 Fireworks
+function startFireworks() {
+  const container = document.getElementById("fireworksCanvas");
+  const fireworks = new Fireworks.default(container, {
+    hue: { min: 0, max: 360 },
+    delay: { min: 15, max: 30 },
+    rocketsPoint: 50,
+    speed: 2,
+    acceleration: 1.05,
+    friction: 0.98,
+    gravity: 1,
+    particles: 50,
+    trace: 3,
+    explosion: 5,
+  });
+  fireworks.start();
+  setTimeout(() => fireworks.stop(), 5000);
+}
+
+
+function showCelebrationEffects() {
+  startConfetti();
+  startEmojiRain();
+}
 
 
 //alert('hello');

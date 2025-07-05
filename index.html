@@ -103,6 +103,48 @@
   }
 }
 
+.birthday-gallery {
+  display: none;
+  padding: 20px;
+  animation: fadeInGallery 1.5s ease-in-out;
+}
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.gallery-img {
+  width: 180px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+  transition: transform 0.4s ease;
+  animation: popIn 1s ease forwards;
+  opacity: 0;
+}
+.gallery-img:hover { transform: scale(1.05); }
+@keyframes fadeInGallery {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.emoji-rain span {
+  position: absolute;
+  animation: fall 4s linear infinite;
+  font-size: 32px;
+}
+@keyframes fall {
+  0% { transform: translateY(-100px); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+#imageGallery, #story, .message {
+  display: none;
+}
+
 	</style>
 </head>
 
@@ -192,59 +234,92 @@
 				</div>
 			</div>
 		</div>
-	<div class="row message">
-  <div class="col-md-12">
-    <p>Hey Papa... 💖</p>
-    <p>Innum July 9 varala...</p>
-    <p>Ana enaku wait panna mudila dii...</p>
-    <p>Un birthday ku naan already romba emotional ah iruken. 🥹</p>
-    <p><strong>Nee kandipa birthday ku fulla ya kuda irukanam Papa...</strong></p>
-    <p>Unakku pakkathula irundhu naan sollanum:</p>
-    <p><span class="glow-text">"Happy Birthday dii my baby, my princess, my wife, my life." 🎂❤️</span></p>
 
-    <p>Na una starting pakum podu...</p>
-    <p><strong>Nee da ya life nu naan nenachae illa...</strong></p>
-    <p>Ana ippo na en life la yaar nu kaetaa...</p>
-    <p>Un peru thaan first varum Gayu. ❤️</p>
 
-    <p>Un kural kettaa calm ah aagiren,</p>
-    <p>Un smile paathaa en stress ellaam poidum,</p>
-    <p>Un presence la dhan naan full ah alive ah feel panren. 😇</p>
 
-    <p>Indha birthday ku naan oru promise panren...</p>
-    <p>Na epovume un pakkathula irupen...</p>
-    <p>Un kooda santhoshama vazha poren...</p>
-    <p>En uyir mudinja varaikkum, naan unakku dhan. 🤍</p>
 
-    <p>Un birthday la naan Shivan kitta prayer panren...</p>
-<p>Un manasu yaaralum hurt aagama irukkattum,</p>
-<p>Un feelings ah purinjukara oruthan naana dhaan iruppaen... 🥹</p>
-<p>Nee epovume safe, happy ah irukkanum nu thaan naan vendikiren.</p>
 
-    <p>Ithu first birthday na unakku wish panren...</p>
-    <p>Ana ithu kadase birthday illa nu naan nichayam solren. 💍</p>
-
-    <p>Na love panren Gayu... romba romba deep ah... from my soul. 💘</p>
-    <p>Happy Birthday in advance Papa... 🥰</p>
-
-    <p><strong>Un Papa 🤍</strong></p>
+<div id="imageGallery" class="birthday-gallery text-center">
+  <h3 class="glow-text">🎉 Gayu's Sweet Memories</h3>
+  <div class="gallery-grid">
+    <div class="gallery-slide" data-caption="Our first crazy memory!">
+      <img src="img1.jpg" class="gallery-img heart-pop">
+      <div class="caption typewriter"></div>
+    </div>
+    <div class="gallery-slide" data-caption="That time we couldn’t stop laughing 😂">
+      <img src="img2.jpg" class="gallery-img heart-pop">
+      <div class="caption typewriter"></div>
+    </div>
+    <div class="gallery-slide" data-caption="Forever in my memory 💕">
+      <img src="img3.jpg" class="gallery-img heart-pop">
+      <div class="caption typewriter"></div>
+    </div>
+    <div class="gallery-slide" data-caption="Surprise GIF coming...">
+      <img src="surprise.gif" class="gallery-img heart-pop">
+      <div class="caption typewriter"></div>
+    </div>
   </div>
 </div>
 
-		<div class="navbar navbar-fixed-bottom">
-			<div class="row">
-				<div class="col-md-6 text-center col-md-offset-3">
-    <button class="btn btn-primary" id="turn_on">✨ Turn On Lights</button>
-    <button class="btn btn-primary" id="play">🎶 Namma Love Song</button>
-    <button class="btn btn-primary" id="bannar_coming">🎀 Begin the Surprise</button>
-    <button class="btn btn-primary" id="balloons_flying">🎈 Balloons for My Princess</button>
-    <button class="btn btn-primary" id="cake_fadein">🎂 Show the Cake</button>
-    <button class="btn btn-primary" id="light_candle">🕯️ Light the Candle</button>
-    <button class="btn btn-primary" id="wish_message">💝 Happy Birthday Papa</button>
-    <button class="btn btn-primary" id="story">📖 Unakaga oru kadhal message</button>
+
+<!-- ✅ Confetti canvas -->
+<canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;"></canvas>
+
+<!-- ✅ Emoji Rain Container -->
+<div class="emoji-rain"></div>
+
+<!-- ✅ Fireworks Canvas -->
+<canvas id="fireworksCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;"></canvas>
+
+
+
+
+
+
+	<div class="row message">
+  <div class="col-md-12">
+    <p>Hey Gayu... 🎉</p>
+    <p>Inniku un birthday da... and idhu unakaga naan solla varra heartfelt message. 💌</p>
+    <p>Nee office la enoda teammate illa da… unakku enoda life la oru special space iruku – un feel, un smile, un support ellaam enaku romba mukkiyam.</p>
+    <p>Unakku oru real talent iruku Gayu... nee edhavadhu pudhusa try panninaa, adhula nee shine panniduva. Adha naan romba neraya time notice panniruken.</p>
+    <p>Nee doubt la irundhaalum, stress la irundhaalum – naan iruken. Unaku enna help venumnaalum un friend ready da. 💪</p>
+    <p>Life la neraya per varuvanga… poguvanga. Aana oru true understanding friend irundhaa, life romba easy aagum. Nee andha friend da Gayu... enaku nambikka kudukkura, support kudukkura oruthii. 🙌</p>
+    <p>Sometimes nee yosikkama, thavaru panra… aana athu dhaan da learning. Nee unmaiya improve aagura character. 💯</p>
+    <p>Unga family ah naan romba respect panren – un Amma, Thambi, Akka, Thatha – ella perum super kind and lovely. Ungaloda vibes super positive. ❤️</p>
+    <p>Ippo un birthday. Naan wish panren, aana naan full-a heart la pray panren:</p>
+    <p>• Un manasu epovume calm and happy ah irukkattum.</p>
+    <p>• Un life la only good people and success varattum.</p>
+    <p>• Unaku thevaana strength and peace epovume kidaikkattum. 🙏</p>
+    <p>Un pathi sollanum na… nee so cute, talented, responsible and caring da. Unmaiya sollanum na... nee oru “gem of a friend”. 💎</p>
+    <p>Nee stress aagala, nee kashta padala nu naan epovume pray panren. Nee naambura perukku dhaan nee thaan da best friend nu solluva. 😌</p>
+    <p>Un birthday ku naan oru small reminder kudukren –</p>
+    <p>"Work is only a part of life. Don’t let it control your happiness. Nee smile panra moment dhaan real success."</p>
+    <p>Yaarum perfect illa, aana nee improve aagirukka every month. Enaku romba proud aa iruku da unaku oru best version aaka help panradhula naan irundhadhukku. 🫂</p>
+    <p>Tambiku support aa iru, Amma kitta kind ah iru. Nee life la achieve panna, naan first cheer pannuravan irupen. 🎯</p>
+    <p>Na suthama comedy pannaama iruka mudiyadhu: Naan unai handle panna kathukitaen da… but romba kashtam 😂 Still, unna vida close friend ennaku illa. 😁</p>
+    <p>So once again, Happy Birthday Gayu 🎂 — indha birthday thaniyaa illa… future la yella birthdays um na irupen. Kooda celebrate pannuvom! 🎊</p>
+    <p><strong>With so much love and respect,</strong></p>
+    <p><strong>Unoda Best Friend 🤍</strong></p>
+  </div>
 </div>
 
-			</div>
+
+		<div class="navbar navbar-fixed-bottom">
+		<div class="row">
+  <div class="col-md-6 text-center col-md-offset-3">
+    <button class="btn btn-primary" id="turn_on">✨ Turn On Lights</button>
+    <button class="btn btn-primary" id="play">🎶 Play a Sweet Song</button>
+    <button class="btn btn-primary" id="bannar_coming">🎀 Let’s Start the Surprise</button>
+    <button class="btn btn-primary" id="balloons_flying">🎈 Balloons for My Bestie</button>
+    <button class="btn btn-primary" id="cake_fadein">🎂 Bring the Cake</button>
+    <button class="btn btn-primary" id="light_candle">🕯️ Light the Candle</button>
+    <button class="btn btn-primary" id="wish_message">💝 Happy Birthday Gayu</button>
+    <button class="btn btn-primary" id="show_images">🖼️ Gayu's Photo Memories</button>
+    <button class="btn btn-primary" id="story">📖 Special Message for You</button>
+  </div>
+</div>
+
+
 			<!-- <div class="col-md-2">
 			</div>
 			<div class="col-md-2">
@@ -261,6 +336,12 @@
 	</div>
 
 	<div class="love-bg" id="loveBackground"></div>
+
+
+  <!-- ✅ JS Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.1.0/dist/fireworks.js"></script>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
