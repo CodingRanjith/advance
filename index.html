@@ -45,7 +45,8 @@
   }
 }
 .banner-image {
-  width: 150px;
+  height: 300px;
+  width: 250px;
   display: inline-block; /* Make sure it's visible */
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
@@ -104,35 +105,104 @@
 }
 
 .birthday-gallery {
-  display: none;
-  padding: 20px;
-  animation: fadeInGallery 1.5s ease-in-out;
-}
-.gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-.gallery-img {
-  width: 180px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-  transition: transform 0.4s ease;
-  animation: popIn 1s ease forwards;
-  opacity: 0;
-}
-.gallery-img:hover { transform: scale(1.05); }
-@keyframes fadeInGallery {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes popIn {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-.emoji-rain span {
+      display: none;
+      padding: 20px;
+      animation: fadeInGallery 1.5s ease-in-out;
+    }
+
+    .glow-text {
+      font-size: 26px;
+      color: #fff;
+      text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff66cc, 0 0 30px #ff66cc;
+      margin-bottom: 20px;
+    }
+
+    .slider-wrapper {
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .center-slide {
+      position: absolute;
+      max-height: 280px;
+      max-width: 90%;
+      border-radius: 15px;
+      opacity: 0;
+      transition: all 1s ease;
+      transform: translateX(-100%) scale(0.9);
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    }
+
+    .center-slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    .gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery-img {
+      width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+      transition: transform 0.4s ease;
+      animation: popIn 1s ease forwards;
+      opacity: 0;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeInGallery {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Button style */
+    .btn {
+      background: #ff66cc;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background: #ff1493;
+    }
+
+
+    .emoji-rain span {
   position: absolute;
   animation: fall 4s linear infinite;
   font-size: 32px;
@@ -141,9 +211,44 @@
   0% { transform: translateY(-100px); opacity: 1; }
   100% { transform: translateY(100vh); opacity: 0; }
 }
-#imageGallery, #story, .message {
+
+#cracked-sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000; /* Dark background for contrast */
   display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  animation: shakeSky 0.4s ease-in-out 4;
 }
+
+#crack-message {
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  animation: fadeInText 2s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes shakeSky {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-10px, 5px); }
+  50% { transform: translate(10px, -5px); }
+  75% { transform: translate(-5px, 10px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes fadeInText {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 
 	</style>
 </head>
@@ -151,40 +256,37 @@
 <body>
 
 
+  <div id="cracked-sky" class="crack-animation">
+  <h1 id="crack-message">🎉 Happy Birthday Gayu 🎉</h1>
+</div>
+
+
+
 	<div class="loading"></div>
 	<audio class="song" controls loop>
-        <source src="ran.mp3"></source>
+        <source src="fav.mp3"></source>
 	   Your browser isn't invited for super fun audio time.
     </audio>
-   <div class="balloons text-center" id="b1">
-    <h2 class="balloon-text" style="color:#F2B300;">L</h2>
+<div class="balloons text-center" id="b1">
+  <h2 class="balloon-text" style="color:#F2B300;">G</h2>
 </div>
 <div class="balloons text-center" id="b2">
-    <h2 class="balloon-text" style="color:#0719D4;">O</h2>
+  <h2 class="balloon-text" style="color:#0719D4;">A</h2>
 </div>
 <div class="balloons text-center" id="b3">
-    <h2 class="balloon-text" style="color:#D14D39;">V</h2>
+  <h2 class="balloon-text" style="color:#D14D39;">Y</h2>
 </div>
 <div class="balloons text-center" id="b4">
-    <h2 class="balloon-text" style="color:#8FAD00;">E</h2>
+  <h2 class="balloon-text" style="color:#8FAD00;">U</h2>
 </div>
 <div class="balloons text-center" id="b5">
-    <h2 class="balloon-text" style="color:#8377E4;">Y</h2>
+  <h2 class="balloon-text" style="color:#8377E4;">💖</h2>
 </div>
 <div class="balloons text-center" id="b6">
-    <h2 class="balloon-text" style="color:#99C96A;">O</h2>
+  <h2 class="balloon-text" style="color:#99C96A;">🎂</h2>
 </div>
 <div class="balloons text-center" id="b7">
-    <h2 class="balloon-text" style="color:#20CFB4;">U</h2>
-</div>
-<div class="balloons text-center" id="b8">
-    <h2 class="balloon-text" style="color:#ff6699;">P</h2>
-</div>
-<div class="balloons text-center" id="b9">
-    <h2 class="balloon-text" style="color:#33cccc;">A</h2>
-</div>
-<div class="balloons text-center" id="b10">
-    <h2 class="balloon-text" style="color:#ff66cc;">💖</h2>
+  <h2 class="balloon-text" style="color:#20CFB4;">👑</h2>
 </div>
 
 
@@ -215,7 +317,7 @@
 		</div>
 		<div class="row">
 		<div id="coupleBanner" class="text-center" style="margin-top: 20px;">
-  <img src="test.jpeg" class="bannar banner-image" />
+  <img src="test.jpg" class="bannar banner-image" />
 </div>
 
 		</div>
@@ -238,16 +340,17 @@
 
 
 
+ <div id="imageGallery" class="birthday-gallery text-center">
+    <h3 class="glow-text">💖 Gayu's Sweet Memories</h3>
 
-<div id="imageGallery" class="birthday-gallery text-center">
-  <h3 class="glow-text">🎉 Gayu's Sweet Memories</h3>
-  <div class="gallery-grid">
-    <img src="img1.jpg" class="gallery-img">
-    <img src="img2.jpg" class="gallery-img">
-    <img src="img3.jpg" class="gallery-img">
-    <img src="img4.jpg" class="gallery-img">
+    <!-- Slideshow -->
+    <div class="slider-wrapper">
+      <img id="slideImage" class="gallery-img center-slide" src="" alt="Memory">
+    </div>
+
+    <!-- Grid -->
+    <div id="galleryGrid" class="gallery-grid"></div>
   </div>
-</div>
 
 <!-- ✅ Confetti canvas -->
 <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;"></canvas>
@@ -264,30 +367,77 @@
 
 
 	<div class="row message">
-  <div class="col-md-12">
-    <p>Hey Gayu... 🎉</p>
-    <p>Inniku un birthday da... and idhu unakaga naan solla varra heartfelt message. 💌</p>
-    <p>Nee office la enoda teammate illa da… unakku enoda life la oru special space iruku – un feel, un smile, un support ellaam enaku romba mukkiyam.</p>
-    <p>Unakku oru real talent iruku Gayu... nee edhavadhu pudhusa try panninaa, adhula nee shine panniduva. Adha naan romba neraya time notice panniruken.</p>
-    <p>Nee doubt la irundhaalum, stress la irundhaalum – naan iruken. Unaku enna help venumnaalum un friend ready da. 💪</p>
-    <p>Life la neraya per varuvanga… poguvanga. Aana oru true understanding friend irundhaa, life romba easy aagum. Nee andha friend da Gayu... enaku nambikka kudukkura, support kudukkura oruthii. 🙌</p>
-    <p>Sometimes nee yosikkama, thavaru panra… aana athu dhaan da learning. Nee unmaiya improve aagura character. 💯</p>
-    <p>Unga family ah naan romba respect panren – un Amma, Thambi, Akka, Thatha – ella perum super kind and lovely. Ungaloda vibes super positive. ❤️</p>
-    <p>Ippo un birthday. Naan wish panren, aana naan full-a heart la pray panren:</p>
-    <p>• Un manasu epovume calm and happy ah irukkattum.</p>
-    <p>• Un life la only good people and success varattum.</p>
-    <p>• Unaku thevaana strength and peace epovume kidaikkattum. 🙏</p>
-    <p>Un pathi sollanum na… nee so cute, talented, responsible and caring da. Unmaiya sollanum na... nee oru “gem of a friend”. 💎</p>
-    <p>Nee stress aagala, nee kashta padala nu naan epovume pray panren. Nee naambura perukku dhaan nee thaan da best friend nu solluva. 😌</p>
-    <p>Un birthday ku naan oru small reminder kudukren –</p>
-    <p>"Work is only a part of life. Don’t let it control your happiness. Nee smile panra moment dhaan real success."</p>
-    <p>Yaarum perfect illa, aana nee improve aagirukka every month. Enaku romba proud aa iruku da unaku oru best version aaka help panradhula naan irundhadhukku. 🫂</p>
-    <p>Tambiku support aa iru, Amma kitta kind ah iru. Nee life la achieve panna, naan first cheer pannuravan irupen. 🎯</p>
-    <p>Na suthama comedy pannaama iruka mudiyadhu: Naan unai handle panna kathukitaen da… but romba kashtam 😂 Still, unna vida close friend ennaku illa. 😁</p>
-    <p>So once again, Happy Birthday Gayu 🎂 — indha birthday thaniyaa illa… future la yella birthdays um na irupen. Kooda celebrate pannuvom! 🎊</p>
-    <p><strong>With so much love and respect,</strong></p>
-    <p><strong>Unoda Best Friend 🤍</strong></p>
-  </div>
+ <div class="col-md-12">
+  <p>Hey Gayu... 🎉</p>
+
+  <p>Inniku un birthday dii! 🎂</p>
+  <p>Idhu unakaga naan solla varra message. 💌</p>
+
+  <p>Nee enoda teammate mattum illa…</p>
+  <p>Unakku enoda life la oru special space iruku dii.</p>
+  <p>Un feel, un smile, un support – ellam romba mukkiyam.</p>
+
+  <p>Unakku oru real talent iruku dii.</p>
+  <p>Nee pudhusa try panninaa, adhula shine panniduva.</p>
+  <p>Naan adha neraya nerathula notice panniruken.</p>
+
+  <p>Nee doubt la irundhaalum, stress la irundhaalum – naan iruken dii.</p>
+  <p>Enna venumnalum sollu, naan ready ah iruken panna. 💪</p>
+
+  <p>Life la neraya per varuvanga… poguvanga.</p>
+  <p>Aana true understanding friend irundha life easy aagum.</p>
+  <p>Nee andha friend dii Gayu. 🙌</p>
+  <p>Nee enaku nambikka kudukkura oruthi.</p>
+
+  <p>Sometimes nee yosikkaama thavaru panra.</p>
+  <p>Aana adhu dhaan learning dii.</p>
+  <p>Nee unmaiya improve aagura character. 💯</p>
+
+  <p>Unga family ah naan romba respect panren.</p>
+  <p>Un Amma, Thambi, Akka, Thatha – ellarum kind and lovely.</p>
+  <p>Ungaloda vibes super positive. ❤️</p>
+
+  <p>Ippo un birthday dii.</p>
+  <p>Naan wish panren… pray panren:</p>
+
+  <p>• Un manasu calm and happy ah irukkattum.</p>
+  <p>• Un life la good people and success varattum.</p>
+  <p>• Unakku strength and peace kidaikkattum. 🙏</p>
+
+  <p>Un pathi sollanum na…</p>
+  <p>Nee so cute, talented, responsible, and caring dii.</p>
+  <p>Unmaiya sollanum na… nee oru “gem of a friend”. 💎</p>
+
+  <p>Nee stress aagala, nee kashta padakoodaadhu nu naan epovume pray panren.</p>
+  <p>Nee naambura perukku dhaan nee thaan da best friend nu solluva. 😌</p>
+
+  <p>Un birthday ku naan oru small reminder kudukren –</p>
+  <p>"Work is only a part of life."</p>
+  <p>"Don’t let it control your happiness."</p>
+  <p>"Nee smile panra moment dhaan real success."</p>
+
+  <p>Yaarum perfect illa.</p>
+  <p>Aana nee improve aagirukka every month.</p>
+  <p>Un best version aaka naan irundhadhukku romba proud dii. 🫂</p>
+
+  <p>Tambiku support aa iru.</p>
+  <p>Amma kitta kind ah iru.</p>
+  <p>Nee achieve pannumbodhu, naan first cheer pannuravan irupen. 🎯</p>
+
+  <p>Naan comedy pannaama iruka mudiyadhu dii. 😅</p>
+  <p>Naan unai handle panna kathukitaen – romba kashtam. 😂</p>
+  <p>Still, unna vida close friend ennaku illa. 😁</p>
+
+  <p>So once again…</p>
+  <p><strong>Happy Birthday Gayu 🎂</strong></p>
+  <p>Indha birthday thaniyaa illa dii…</p>
+  <p>Future la yella birthdays um naan irupen.</p>
+  <p>Kooda celebrate pannuvom! 🎊</p>
+
+  <p><strong>With so much love and respect,</strong></p>
+  <p><strong>Unoda Best Friend 🤍</strong></p>
+</div>
+
 </div>
 
 
@@ -295,11 +445,11 @@
 		<div class="row">
   <div class="col-md-6 text-center col-md-offset-3">
     <button class="btn btn-primary" id="turn_on">✨ Turn On Lights</button>
-    <button class="btn btn-primary" id="play">🎶 Play a Sweet Song</button>
+    <button class="btn btn-primary" id="play">🎶 Play Our Favorite Song</button>
     <button class="btn btn-primary" id="bannar_coming">🎀 Let’s Start the Surprise</button>
-    <button class="btn btn-primary" id="balloons_flying">🎈 Balloons for My Bestie</button>
-    <button class="btn btn-primary" id="cake_fadein">🎂 Bring the Cake</button>
-    <button class="btn btn-primary" id="light_candle">🕯️ Light the Candle</button>
+    <button class="btn btn-primary" id="balloons_flying">🎈 Balloons Just for You, Birthday Queen!</button>
+    <button class="btn btn-primary" id="cake_fadein">🎂 Time for Cake — Let’s Celebrate!</button>
+    <button class="btn btn-primary" id="light_candle">🕯️ Make a Wish, Light the Candle!</button>
     <button class="btn btn-primary" id="wish_message">💝 Happy Birthday Gayu</button>
     <button class="btn btn-primary" id="show_images">🖼️ Gayu's Photo Memories</button>
     <button class="btn btn-primary" id="story">📖 Special Message for You</button>

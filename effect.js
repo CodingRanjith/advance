@@ -19,19 +19,34 @@ $('document').ready(function(){
 
 		 $('#play, #bannar_coming, #balloons_flying, #cake_fadein, #light_candle, #wish_message, #show_images, #story').hide();
 
-	$('#turn_on').click(function(){
-		showCelebrationEffects();
-		$('#bulb_yellow').addClass('bulb-glow-yellow');
-		$('#bulb_red').addClass('bulb-glow-red');
-		$('#bulb_blue').addClass('bulb-glow-blue');
-		$('#bulb_green').addClass('bulb-glow-green');
-		$('#bulb_pink').addClass('bulb-glow-pink');
-		$('#bulb_orange').addClass('bulb-glow-orange');
-		$('body').addClass('peach');
-		$(this).fadeOut('slow').delay(5000).promise().done(function(){
-			$('#play').fadeIn('slow');
-		});
-	});
+	$('#turn_on').click(function () {
+  showCelebrationEffects();
+
+  // Cracked sky reveal
+  $('#cracked-sky').fadeIn(500, function () {
+    $('#crack-message').addClass('active');
+  });
+
+  // Add bulb glow and background after short delay
+  setTimeout(() => {
+    $('#bulb_yellow').addClass('bulb-glow-yellow');
+    $('#bulb_red').addClass('bulb-glow-red');
+    $('#bulb_blue').addClass('bulb-glow-blue');
+    $('#bulb_green').addClass('bulb-glow-green');
+    $('#bulb_pink').addClass('bulb-glow-pink');
+    $('#bulb_orange').addClass('bulb-glow-orange');
+    $('body').addClass('peach');
+  }, 2000);
+
+  // Hide cracked sky and continue sequence
+  setTimeout(() => {
+    $('#cracked-sky').fadeOut(500);
+    $('#turn_on').fadeOut('slow').delay(1000).promise().done(function () {
+      $('#play').fadeIn('slow');
+    });
+  }, 4000);
+});
+
 	$('#play').click(function(){
 		showCelebrationEffects();
 		var audio = $('.song')[0];
@@ -110,7 +125,6 @@ $('document').ready(function(){
 	}
 
 	$('#balloons_flying').click(function(){
-		showCelebrationEffects();
 		$('.balloon-border').animate({top:-500},8000);
 		$('#b1,#b4,#b5,#b7').addClass('balloons-rotate-behaviour-one');
 		$('#b2,#b3,#b6').addClass('balloons-rotate-behaviour-two');
@@ -133,7 +147,6 @@ $('document').ready(function(){
 	});	
 
 	$('#cake_fadein').click(function(){
-		showCelebrationEffects();
 		$('.cake').fadeIn('slow');
 		$(this).fadeOut('slow').delay(3000).promise().done(function(){
 			$('#light_candle').fadeIn('slow');
@@ -150,7 +163,6 @@ $('document').ready(function(){
 
 		
 	$('#wish_message').click(function(){
-		showCelebrationEffects();
 	vw = $(window).width()/2;
 
 	$('#b1,#b2,#b3,#b4,#b5,#b6,#b7').stop();
@@ -179,35 +191,35 @@ $('document').ready(function(){
 
 	
 	$('#story').click(function(){
-		showCelebrationEffects();
-		$(this).fadeOut('slow');
-		$('.cake').fadeOut('fast').promise().done(function(){
-			$('.message').fadeIn('slow');
-		});
-		
-		var i;
+  showCelebrationEffects();
+  
+  // 👇 ADD THIS LINE to hide the image gallery
+  $('#imageGallery').fadeOut('slow');
 
-		function msgLoop (i) {
-			$("p:nth-child("+i+")").fadeOut('slow').delay(2500).promise().done(function(){
-			i=i+1;
-			$("p:nth-child("+i+")").fadeIn('slow').delay(2500);
-			if(i==50){
-				$("p:nth-child(49)").fadeOut('slow').promise().done(function () {
-					$('.cake').fadeIn('fast');
-				});
-				
-			}
-			else{
-				msgLoop(i);
-			}			
+  $(this).fadeOut('slow');
+  $('.cake').fadeOut('fast').promise().done(function(){
+    $('.message').fadeIn('slow');
+  });
 
-		});
-			// body...
-		}
-		
-		msgLoop(0);
-		
-	});
+  var i;
+
+  function msgLoop(i) {
+    $("p:nth-child("+i+")").fadeOut('slow').delay(5500).promise().done(function(){
+      i = i + 1;
+      $("p:nth-child("+i+")").fadeIn('slow').delay(2500);
+      if (i == 50) {
+        $("p:nth-child(49)").fadeOut('slow').promise().done(function () {
+          $('.cake').fadeIn('fast');
+        });
+      } else {
+        msgLoop(i);
+      }
+    });
+  }
+
+  msgLoop(0);
+});
+
 });
 
 $('#show_images').click(function () {
