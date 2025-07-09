@@ -50,7 +50,7 @@ setInterval(spawnEmojiLove, 800);
 const imageList = [];
 
 // Push 01.jpg to 42.jpg into imageList
-for (let i = 1; i <= 44; i++) {
+for (let i = 1; i <= 45; i++) {
   const fileNumber = i.toString().padStart(2, '0'); // ensures 01, 02, ..., 42
   imageList.push(`gayu/${fileNumber}.jpg`);
 }
